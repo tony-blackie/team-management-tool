@@ -5,8 +5,11 @@
 		.module('app.users')
 		.controller('UserListController', UserListController);
 
-	function UserListController() {
+	//UserListController.$inject = ['$http', '$q'];
+
+	function UserListController($http, $q, EmployeeService) {
 		var vm = this;
+		
 		vm.tabs = [
 			{
 				uiSref: "team-management",
@@ -20,10 +23,14 @@
 			}
 		];
 		vm.isActive = false;
+		
 		angular.extend(vm, {
 			getSomeList: getSomeList,
-			makeActive: makeActive
+			makeActive: makeActive,
+			getEmployeeList: getEmployeeList
 		});
+
+		getEmployeeList();
 
 		function getSomeList() {
 			alert('8');
@@ -33,6 +40,10 @@
 			angular.forEach(vm.tabs, function(value, index) {
 				value.isActive = (index === $index) ? true : false;
 			});
+		}
+
+		function getEmployeeList() {
+			EmployeeService.getAllEmployees();
 		}
 	}
 })();

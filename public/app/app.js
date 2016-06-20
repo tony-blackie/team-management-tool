@@ -11,14 +11,64 @@
         .module('app.users', ['ui.router']);
 })();
 (function() {
+	
+	angular
+		.module('app.users')
+		.factory('EmployeeService', EmployeeService);
+
+	EmployeeService.$inject = ['$http', '$q'];
+
+	function EmployeeService($http, $q) {
+		var vm = this;
+
+		angular.extend(vm, {
+			getAllEmployees: getAllEmployees,
+			createPromise: createPromise
+		});
+
+		return vm;
+
+		function getAllEmployees() {
+			var promise = vm.createPromise();
+			promise.then(
+				function(data) {
+					console.log(data);
+				},
+				function(error) {
+					console.log(data);
+				});
+		}
+
+		function createPromise() {
+			var deferred = $q.defer();
+
+			$http.get('/employees')
+				.success(function(data) {
+					debugger;
+					deferred.resolve();
+				})
+				.error(function(data) {
+					debugger;
+					deffered.reject();
+				})
+
+			return deferred.promise;
+		}
+
+	}
+})();
+(function() {
 	"use strict";
 
 	angular
 		.module('app.users')
 		.controller('UserListController', UserListController);
 
-	function UserListController() {
+	//UserListController.$inject = ['$http', '$q'];
+
+	function UserListController($http, $q, EmployeeService) {
 		var vm = this;
+		
 		vm.tabs = [
 			{
 				uiSref: "team-management",
@@ -32,10 +82,14 @@
 			}
 		];
 		vm.isActive = false;
+		
 		angular.extend(vm, {
 			getSomeList: getSomeList,
-			makeActive: makeActive
+			makeActive: makeActive,
+			getEmployeeList: getEmployeeList
 		});
+
+		getEmployeeList();
 
 		function getSomeList() {
 			alert('8');
@@ -45,6 +99,10 @@
 			angular.forEach(vm.tabs, function(value, index) {
 				value.isActive = (index === $index) ? true : false;
 			});
+		}
+
+		function getEmployeeList() {
+			EmployeeService.getAllEmployees();
 		}
 	}
 })();

@@ -1,12 +1,12 @@
-var users = require('./src/models/users.json');
+var employees = require('./src/models/employees.json');
 
 var express = require('express');
 var app = express();
 
 app.use(express.static('./public', {index: 'userList.html'}));
 
-app.get('/users', (req, res)=> {
-	res.json(users);
+app.get('/employees', (req, res)=> {
+	res.json(employees);
 });
 
 app.listen(3000);
