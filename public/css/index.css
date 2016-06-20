@@ -1,0 +1,23 @@
+.tm-tabs {
+	
+}
+
+.tm-tab-content {
+	border: #e7e7e7 solid 1px;
+	border-radius: 4px;
+
+}
+
+.tm-tab-container {
+	border: #e7e7e7 solid 1px;
+	background-color: ;
+	border-radius: 4px;
+	width: 500px;
+	height: 500px;
+	padding: 10px;
+	margin: 10px 0 0 10px;
+}
+
+.tm-employee-table {
+	width: 500px;
+}

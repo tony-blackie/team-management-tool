@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="./lib/jquery-2.2.4.js"></script>
+	<script src="./lib/angular.js" defer></script>
+	<script src="./lib/angular-ui-router.js" defer></script>
+	<script src="./lib/bootstrap-3.3.6-dist/js/bootstrap.js"></script>
+	<script src="./app/app.js" defer></script>
+	<link rel="stylesheet" href="lib/bootstrap-3.3.6-dist/css/bootstrap.css"></link>
+	<link rel="stylesheet" href="lib/bootstrap-3.3.6-dist/css/bootstrap-theme.css"></link>
+	<link rel="stylesheet" href="css/index.css"></link>
+
+</head>
+<body ng-controller="UserListController as userListCtrl">
+	<div>
+		<div style="background-color: red; display: block; width: 50px; height: 50px;"
+			 ng-click="userListCtrl.getSomeList()"></div>
+	</div>
+	<div class="tm-tab-container">
+		<ul class="nav nav-tabs tm-tabs">
+			<li ng-repeat="tab in userListCtrl.tabs" 
+				ui-sref="{{userListCtrl.tabs[$index].uiSref}}" 
+				role="presentation" 
+				ng-click="userListCtrl.makeActive($index)" 
+				ng-class="{'active': userListCtrl.tabs[$index].isActive}">
+					<a href="#">{{userListCtrl.tabs[$index].name}}</a>
+			</li>
+		</ul>
+		<div class="tm-tab-content">
+			<ui-view></ui-view>
+		</div>
+	</div>
+	
+</body>
+</html>
