@@ -7,7 +7,7 @@
 
 	//UserListController.$inject = ['$http', '$q'];
 
-	function UserListController($http, $q, EmployeeService) {
+	function UserListController() {
 		var vm = this;
 		
 		vm.tabs = [
@@ -26,11 +26,8 @@
 		
 		angular.extend(vm, {
 			getSomeList: getSomeList,
-			makeActive: makeActive,
-			getEmployeeList: getEmployeeList
+			makeActive: makeActive
 		});
-
-		getEmployeeList();
 
 		function getSomeList() {
 			alert('8');
@@ -40,10 +37,6 @@
 			angular.forEach(vm.tabs, function(value, index) {
 				value.isActive = (index === $index) ? true : false;
 			});
-		}
-
-		function getEmployeeList() {
-			EmployeeService.getAllEmployees();
 		}
 	}
 })();

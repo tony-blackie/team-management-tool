@@ -14,6 +14,33 @@
 	
 	angular
 		.module('app.users')
+		.controller('EmployeeController', EmployeeController);
+
+	EmployeeController.$inject = ['EmployeeService'];
+
+	function EmployeeController(EmployeeService) {
+		var vm = this;
+
+		vm.employees = [];
+
+		angular.extend(vm, {
+			getAllEmployees: getAllEmployees
+		});
+
+
+		vm.getAllEmployees();
+
+		function getAllEmployees() {
+			EmployeeService.getAllEmployees().then(function(data) {
+				vm.employees = data;
+			});
+		}
+	}
+})();
+(function() {
+	
+	angular
+		.module('app.users')
 		.factory('EmployeeService', EmployeeService);
 
 	EmployeeService.$inject = ['$http', '$q'];
@@ -30,13 +57,7 @@
 
 		function getAllEmployees() {
 			var promise = vm.createPromise();
-			promise.then(
-				function(data) {
-					console.log(data);
-				},
-				function(error) {
-					console.log(data);
-				});
+			return promise;
 		}
 
 		function createPromise() {
@@ -44,12 +65,10 @@
 
 			$http.get('/employees')
 				.success(function(data) {
-					debugger;
-					deferred.resolve();
+					deferred.resolve(data);
 				})
 				.error(function(data) {
-					debugger;
-					deffered.reject();
+					deffered.reject("Could not get all employees!");
 				})
 
 			return deferred.promise;
@@ -66,7 +85,7 @@
 
 	//UserListController.$inject = ['$http', '$q'];
 
-	function UserListController($http, $q, EmployeeService) {
+	function UserListController() {
 		var vm = this;
 		
 		vm.tabs = [
@@ -85,11 +104,8 @@
 		
 		angular.extend(vm, {
 			getSomeList: getSomeList,
-			makeActive: makeActive,
-			getEmployeeList: getEmployeeList
+			makeActive: makeActive
 		});
-
-		getEmployeeList();
 
 		function getSomeList() {
 			alert('8');
@@ -99,10 +115,6 @@
 			angular.forEach(vm.tabs, function(value, index) {
 				value.isActive = (index === $index) ? true : false;
 			});
-		}
-
-		function getEmployeeList() {
-			EmployeeService.getAllEmployees();
 		}
 	}
 })();
@@ -127,7 +139,7 @@
             .state('employee-management', {
                 url: '/employee',
                 templateUrl: './views/employee-management.html',
-                controller: 'UserListController as userListCtrl'
+                controller: 'EmployeeController as employeeCtrl'
             });
     }
 })();

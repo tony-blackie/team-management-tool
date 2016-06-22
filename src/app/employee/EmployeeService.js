@@ -18,13 +18,7 @@
 
 		function getAllEmployees() {
 			var promise = vm.createPromise();
-			promise.then(
-				function(data) {
-					console.log(data);
-				},
-				function(error) {
-					console.log(data);
-				});
+			return promise;
 		}
 
 		function createPromise() {
@@ -32,12 +26,10 @@
 
 			$http.get('/employees')
 				.success(function(data) {
-					debugger;
-					deferred.resolve();
+					deferred.resolve(data);
 				})
 				.error(function(data) {
-					debugger;
-					deffered.reject();
+					deffered.reject("Could not get all employees!");
 				})
 
 			return deferred.promise;

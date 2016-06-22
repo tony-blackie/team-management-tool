@@ -1,4 +1,4 @@
-<input placeholder="Filter"></input>
+<input placeholder="Filter" ng-model="searchText"></input>
 
 <table class="tm-employee-table">
 	<tr>
@@ -7,10 +7,10 @@
 		<th>Age</th>
 		<th>Grade</th>
 	</tr>
-	<tr>
-		<td>Name</td>
-		<td>Job Title</td>
-		<td>Age</td>
-		<td>Grade</td>
+	<tr ng-repeat="employee in employeeCtrl.employees | filter:searchText">
+		<td>{{ employee.name }}</td>
+		<td>{{ employee.job }}</td>
+		<td>{{ employee.age }}</td>
+		<td>{{ employee.grade }}</td>
 	</tr>
 </table>
