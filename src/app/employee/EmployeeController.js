@@ -15,7 +15,6 @@
 			getAllEmployees: getAllEmployees
 		});
 
-
 		vm.getAllEmployees();
 
 		function getAllEmployees() {

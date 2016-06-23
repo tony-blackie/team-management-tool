@@ -10,6 +10,7 @@
 }
 
 .tm-tab-container {
+	display: inline-block;
 	border: #e7e7e7 solid 1px;
 	background-color: ;
 	border-radius: 4px;
@@ -21,4 +22,15 @@
 
 .tm-employee-table {
 	width: 500px;
+}
+
+.tm-team-container {
+	display: inline-block;
+	margin: 15px 0 0 20px;
+    vertical-align: top;
+}
+
+.tm-team-list {
+	width: 500px;
+	height: 500px;
 }
