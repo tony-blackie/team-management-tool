@@ -38,5 +38,13 @@
 				value.isActive = (index === $index) ? true : false;
 			});
 		}
+
+		function activateTeam() {
+			alert(4);
+		}
+
+		function alertSomething() {
+			alert(6);
+		}
 	}
 })();
