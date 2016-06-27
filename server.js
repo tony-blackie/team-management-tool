@@ -3,7 +3,7 @@ var employees = require('./src/models/employees.json');
 var express = require('express');
 var app = express();
 
-app.use(express.static('./public', {index: 'userList.html'}));
+app.use(express.static('./public', {index: 'index.html'}));
 
 
 app.get('/employees', (req, res)=> {

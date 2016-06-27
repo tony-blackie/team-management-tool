@@ -7,7 +7,7 @@
 		<th>Age</th>
 		<th>Grade</th>
 	</tr>
-	<tr ng-repeat="employee in employeeCtrl.employees | filter:searchText">
+	<tr ng-repeat="employee in employeeCtrl.employees | filter:searchText" ng-click="employeeCtrl.addEmployee($event)">
 		<td>{{ employee.name }}</td>
 		<td>{{ employee.job }}</td>
 		<td>{{ employee.age }}</td>

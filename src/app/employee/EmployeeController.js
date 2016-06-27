@@ -4,15 +4,16 @@
 		.module('app.users')
 		.controller('EmployeeController', EmployeeController);
 
-	EmployeeController.$inject = ['EmployeeService'];
+	EmployeeController.$inject = ['EmployeeService', 'TeamStoreService'];
 
-	function EmployeeController(EmployeeService) {
+	function EmployeeController(EmployeeService, TeamStoreService) {
 		var vm = this;
 
 		vm.employees = [];
 
 		angular.extend(vm, {
-			getAllEmployees: getAllEmployees
+			getAllEmployees: getAllEmployees,
+			addEmployee: addEmployee
 		});
 
 		vm.getAllEmployees();
@@ -21,6 +22,12 @@
 			EmployeeService.getAllEmployees().then(function(data) {
 				vm.employees = data;
 			});
+		}
+
+		function addEmployee($event) {
+			if (TeamStoreService.getActiveTeam() !== "") {
+
+			}
 		}
 	}
 })();

@@ -8,7 +8,7 @@
     userListRoutes.$inject = ['$stateProvider', '$urlRouterProvider'];
 
     function userListRoutes($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise('/team');
+        $urlRouterProvider.otherwise('/');
 
         $stateProvider
             .state('team-management', {
